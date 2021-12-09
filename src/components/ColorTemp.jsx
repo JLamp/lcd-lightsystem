@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { Dot } from "./Dot.jsx";
 
-const COLORS = ["#E9F5FF", "#fff", "#FEEFC8", "#FFDF96"];
+const COLORS = ["#FFFFFF", "#FFE7D1", "#FFC68C"];
 
 const ColorContainer = styled.div`
   display: flex;
   width: 100%;
-  column-gap: 16px;
+  column-gap: 12px;
   justify-content: center;
 `;
 

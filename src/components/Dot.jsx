@@ -1,10 +1,16 @@
 import styled from "styled-components";
 
-export const Dot = styled.div`
-  width: 64px;
-  height: 64px;
+export const Dot = styled.button`
+  unset: all;
+  width: 48px;
+  height: 48px;
   background: transparent;
-  border: ${({ active }) => (active ? "4px solid blue" : "2px solid black")};
+  border-style: solid;
+  border-width: 2px;
+  border-color: ${({ active, theme }) =>
+    active ? theme.uiColors.active : theme.uiColors.black};
   border-radius: 100%;
   box-sizing: border-box;
+  ${({ active, theme }) =>
+    active && "box-shadow: 0px 0px 0px 2px " + theme.uiColors.active};
 `;

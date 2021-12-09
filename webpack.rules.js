@@ -17,13 +17,14 @@ module.exports = [
     },
   },
   {
-    test: /\.jsx?$/,
+    test: /\.(js|jsx)$/,
+    exclude: /node_modules/,
     use: {
-      loader: 'babel-loader',
-      options: {
-        exclude: /node_modules/,
-        presets: ['@babel/preset-react']
-      }
+      loader: "babel-loader"
     }
-  }
+  },
+{  resolve: {
+    extensions: ['.js', '.jsx'],
+    modules: ['node_modules'],
+  }}
 ];
