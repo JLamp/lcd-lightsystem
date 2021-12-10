@@ -7,6 +7,8 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
   app.quit();
 }
 
+Menu.setApplicationMenu(null);
+
 const createWindow = (position) => {
   // Create the browser window.
   // We cannot require the screen module until the app is ready.
@@ -16,7 +18,7 @@ const createWindow = (position) => {
   const primaryDisplay = screen.getPrimaryDisplay();
   const { width, height } = primaryDisplay.workAreaSize;
 
-  const browserWidth = 400;
+  const browserWidth = width;
   const browserHeight = height;
 
   const leftEdge = 0;
@@ -27,8 +29,8 @@ const createWindow = (position) => {
   const edge = position === "left" ? leftEdge : rightEdge;
 
   const win = new BrowserWindow({
-    width: browserWidth,
-    height: browserHeight,
+    width: width,
+    height: height,
     x: edge,
     y: 0,
     minWidth: 392,
@@ -38,7 +40,8 @@ const createWindow = (position) => {
     },
     titleBarStyle: 'hiddenInset',
     show: false,
-    backgroundColor: "#0B0D0E"
+    // backgroundColor: "#0B0D0E"
+    // transparent: true
   });
 
   win.loadURL(
@@ -49,12 +52,14 @@ const createWindow = (position) => {
     win.show()
   })
 
+  win.openDevTools({ mode: 'detach' })
+
 }
 
 let tray = null;
 
 app.on('ready', () => {
-  tray = new Tray(path.join(__dirname, '/icon.png'));
+  tray = new Tray(path.join(__dirname, '/appIcon/iconTemplate.png'));
 
   if (process.platform === 'win32') {
     tray.on('click', tray.popUpContextMenu);
@@ -62,12 +67,12 @@ app.on('ready', () => {
 
   const menu = Menu.buildFromTemplate([
     {
-      label: 'Create New Light - Left',
-      click() { createWindow("left"); }
+      label: 'Create New Light ',
+      click() { createWindow(); }
     },
     {
-      label: 'Create New Light - Right',
-      click() { createWindow("right"); }
+      label: 'Quit',
+      click() { app.quit(); }
     }
   ]);
 
@@ -90,6 +95,8 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+// app.dock.hide()
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

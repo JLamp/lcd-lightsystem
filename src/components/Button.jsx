@@ -1,18 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 import ModalUnstyled from "@mui/base/ModalUnstyled";
-import { Dot } from "./Dot.jsx";
+import { DotButton } from "./Dot.jsx";
 import { Tooltip } from "@mui/material";
-
-const DotButton = styled(Dot)`
-  background-color: ${({ active }) => active && "rgba(0,0,0,.05)"};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &:hover {
-    background: rgba(0, 0, 0, 0.05);
-  }
-`;
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -39,13 +29,13 @@ const Backdrop = styled("div")`
 
 const ModalContent = styled.div`
   position: absolute;
-  bottom: 124px;
+  bottom: 96px;
   &:focus-visible {
     outline: unset;
   }
 `;
 
-export const Button = ({ icon, tooltip, children }) => {
+export const Button = ({ icon, tooltip, children, bgColor }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -55,7 +45,12 @@ export const Button = ({ icon, tooltip, children }) => {
   return (
     // <Tooltip arrow={true} placement="top" title={tooltip}>
     <div>
-      <DotButton onClick={handleOpen} active={open} sx={{ fontSize: 32 }}>
+      <DotButton
+        onClick={handleOpen}
+        active={open}
+        sx={{ fontSize: 32 }}
+        bgColor={bgColor}
+      >
         {icon}
       </DotButton>
       <StyledModal

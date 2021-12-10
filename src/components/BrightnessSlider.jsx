@@ -19,7 +19,27 @@ const Value = styled.span`
   pointer-events: none;
 `;
 
-const StyledSlider = styled(SliderUnstyled)`
+const StyledSlider = styled(SliderUnstyled).attrs(
+  ({ temp, value, lightcolor }) => ({
+    style: {
+      background:
+        "linear-gradient(to right, " +
+        temp +
+        " " +
+        value +
+        "%, black " +
+        value +
+        "% " +
+        (value + 0.5) +
+        "%, " +
+        lightcolor +
+        " " +
+        (value + 0.5) +
+        "% 100%" +
+        ")",
+    },
+  })
+)`
   height: 48px;
   display: flex;
   align-items: center;
@@ -29,19 +49,6 @@ const StyledSlider = styled(SliderUnstyled)`
   cursor: pointer;
   touch-action: none;
   -webkit-tap-highlight-color: transparent;
-  background: linear-gradient(
-    to right,
-    ${({ sliderValue }) =>
-      "white " +
-      sliderValue +
-      "%, black " +
-      sliderValue +
-      "% " +
-      (sliderValue + 0.5) +
-      "%, transparent " +
-      (sliderValue + 0.5) +
-      "% 100%"}
-  );
 
   & .MuiSlider-rail,
   .muiSlider-track,
@@ -54,21 +61,24 @@ const StyledSlider = styled(SliderUnstyled)`
   }
 `;
 
-export const BrightnessSlider = ({ getChange, brightness }) => {
-  const [sliderValue, setSliderValue] = useState(brightness);
-
+export const BrightnessSlider = ({
+  getChange,
+  brightness,
+  temp,
+  lightColor,
+}) => {
   return (
     <SliderContainer>
-      <Value sliderValue={sliderValue}>{sliderValue + "%"}</Value>
+      <Value sliderValue={brightness}>{brightness + "%"}</Value>
       <StyledSlider
         defaultValue={brightness}
-        aria-label="Default"
-        valueLabelDisplay="auto"
+        aria-label="Brightness"
         onChange={(e) => {
-          setSliderValue(e.target.value);
           getChange(e.target.value);
         }}
-        sliderValue={sliderValue}
+        value={brightness}
+        temp={temp}
+        lightcolor={lightColor}
       />
     </SliderContainer>
   );

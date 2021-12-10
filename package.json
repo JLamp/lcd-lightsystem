@@ -1,15 +1,16 @@
 {
-  "name": "ron",
-  "productName": "ron",
+  "name": "lcd-lightsystem",
+  "productName": "LCD Lightsystem",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Liquid Crystals DUDE",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "echo \"No linting configured\"",
+    "make-mac": "npx @electron-forge/cli make --platform darwin"
   },
   "keywords": [],
   "author": {
